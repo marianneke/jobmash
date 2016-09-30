@@ -9,7 +9,7 @@ import psycopg2
 
 from utilities import remember_viewed_jobs
 
-user = 'marianne'             
+user = 'ubuntu'             
 host = 'localhost'
 dbname = 'indeed_db'
 db = create_engine('postgres://%s%s/%s'%(user,host,dbname))
