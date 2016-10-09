@@ -10,7 +10,7 @@ import psycopg2
 
 from utilities import remember_viewed_jobs
 
-user = 'marianne'             
+user = 'ubuntu'             
 host = 'localhost'
 dbname = 'indeed_db'
 db = create_engine('postgres://%s%s/%s'%(user,host,dbname))
@@ -31,7 +31,7 @@ def find_candidate_type():
 @app.route('/input')
 def jobsearch_input():
     #jobs_seen = []
-    return render_template("input.html")#, jobs_seen=jobs_seen)
+    return render_template("input.html")
 
 @app.route('/output', methods=['POST', 'GET'])
 def jobsearch_output():
