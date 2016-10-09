@@ -21,6 +21,11 @@ jobkeys_picked = []
 
 @app.route('/')
 
+@app.route('/index')
+def jobsearch_index():
+    #jobs_seen = []
+    return render_template("input.html")
+
 @app.route('/employers')
 def find_candidate_type():
   #pull 'job title' from input field and store it
