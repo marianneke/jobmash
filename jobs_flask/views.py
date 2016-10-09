@@ -88,7 +88,8 @@ def jobsearch_output():
       try:
         jobs_seen.append({'jobkey': query_results.iloc[i]['jobkey'], 'url': query_results.iloc[i]['url'], 'jobtitle': query_results.iloc[i]['jobtitle'], 'company': query_results.iloc[i]['company']})
       except:
-        jobs_seen = [{'jobkey': query_results.iloc[i]['jobkey'], 'url': query_results.iloc[i]['url'], 'jobtitle': query_results.iloc[i]['jobtitle'], 'company': query_results.iloc[i]['company']}]
+        print "Error with appending jobs seen"
+        # jobs_seen = [{'jobkey': query_results.iloc[i]['jobkey'], 'url': query_results.iloc[i]['url'], 'jobtitle': query_results.iloc[i]['jobtitle'], 'company': query_results.iloc[i]['company']}]
       print "Appended jobs seen", len(jobs_seen)
       jobs.append(dict(jobkey=query_results.iloc[i]['jobkey'], jobtitle=query_results.iloc[i]['jobtitle'], url=query_results.iloc[i]['url'], company=query_results.iloc[i]['company'], description=query_results.iloc[i]['description']))
     # Remove duplicates from jobs_seen list
