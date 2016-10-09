@@ -4,12 +4,13 @@ from sqlalchemy import create_engine
 from sqlalchemy_utils import database_exists, create_database
 import random
 import re
+import ast
 import pandas as pd
 import psycopg2
 
 from utilities import remember_viewed_jobs
 
-user = 'ubuntu'             
+user = 'marianne'             
 host = 'localhost'
 dbname = 'indeed_db'
 db = create_engine('postgres://%s%s/%s'%(user,host,dbname))
@@ -46,6 +47,9 @@ def jobsearch_output():
     #just select the jobs from the indeed database for the state and jobtitle that the user inputs
     query = "SELECT jobkey, jobtitle, url, company, description FROM indeed_jobs_top50 WHERE LOWER(jobtitle) LIKE lower('%s') AND LOWER(state) LIKE lower('%s')  ORDER BY RANDOM() LIMIT 2" % (search_jobtitle, search_loc)
   if request.method == 'POST':
+    # pull 'jobs_seen' from button and store it
+    jobs_seen = request.form['jobs_seen']
+    jobs_seen = ast.literal_eval(jobs_seen)
     #pull 'jobkey_choice' from button and store it
     jobkey_choice = request.form['jobkey_choice']
     try:
@@ -90,7 +94,8 @@ def jobsearch_output():
     # Remove duplicates from jobs_seen list
     #jobs_seen = list(set(jobs_seen))
     print "jobs seen:", jobs_seen
-    return render_template("output.html", jobs = jobs, jobs_seen = jobs_seen, jobkeys_picked = jobkeys_picked)
+    jobs_seen_str = str(jobs_seen).replace(" ", "")
+    return render_template("output.html", jobs = jobs, jobs_seen = jobs_seen, jobs_seen_str = jobs_seen_str)
   except:
     print "Query unsuccesful"
-    return render_template("input.html")#, jobs_seen=jobs_seen)
+    return render_template("input.html")

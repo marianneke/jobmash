@@ -103,6 +103,7 @@
               <div class="col-md-5">
  		<form class="btn-group" action="/output" method=post>
                 <input type="hidden" id="jobkey_choice" name="jobkey_choice" value={{ job['jobkey'] }}>
+                <input type="hidden" id="jobs_seen" name="jobs_seen" value={{jobs_seen_str}}>
                 <button type="submit" class="btn btn-default btn-lg"> {{ job['company'] }} </button>
               </div>
         {% endfor %}
