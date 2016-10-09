@@ -35,6 +35,7 @@ def jobsearch_input():
 
 @app.route('/output', methods=['POST', 'GET'])
 def jobsearch_output():
+  jobs_seen = []
   if request.method == 'GET':
     # empty list of jobs seen and jobs picked
     jobs_seen = []
@@ -94,7 +95,6 @@ def jobsearch_output():
       jobs.append(dict(jobkey=query_results.iloc[i]['jobkey'], jobtitle=query_results.iloc[i]['jobtitle'], url=query_results.iloc[i]['url'], company=query_results.iloc[i]['company'], description=query_results.iloc[i]['description']))
     # Remove duplicates from jobs_seen list
     #jobs_seen = list(set(jobs_seen))
-    print "jobs seen:", jobs_seen
     jobs_seen_str = str(jobs_seen).replace(" ", "")
     return render_template("output.html", jobs = jobs, jobs_seen = jobs_seen, jobs_seen_str = jobs_seen_str)
   except:
